@@ -1,0 +1,29 @@
+{
+  "name": "tsentiment-api-service",
+  "version": "1.0.0",
+  "description": "this service do all required api service process for tsentiment users",
+  "main": "local.js",
+  "scripts": {
+    "start": "nodemon local.js",
+    "deploy": "serverless deploy"
+  },
+  "keywords": [
+    "tsentiment",
+    "api",
+    "service"
+  ],
+  "author": "Hakki SABAH",
+  "license": "MIT",
+  "dependencies": {
+    "@vendia/serverless-express": "^4.5.2",
+    "axios": "^0.21.4",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-bearer-token": "^2.4.0",
+    "express-useragent": "^1.0.15",
+    "helmet": "^4.6.0",
+    "oauth": "^0.9.15",
+    "request-ip": "^2.1.3"
+  }
+}

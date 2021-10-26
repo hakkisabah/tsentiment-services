@@ -1,0 +1,24 @@
+service: tsentiment-redis-service
+
+provider:
+ name: aws
+ runtime: nodejs14.x
+ memorySize: 128
+ timeout: 10
+ stage: redis
+ region: eu-central-1
+
+functions:
+ api:
+   handler: lambda.universal
+   events:
+     - http: ANY {proxy+}
+     - http: ANY /
+   environment :
+     API_SERVICE_TOKEN : ${self:custom.secrets.API_SERVICE_TOKEN}
+     OAUTH_SERVICE_TOKEN : ${self:custom.secrets.OAUTH_SERVICE_TOKEN}
+     REDIS_URL : ${self:custom.secrets.REDIS_URL}
+     REDIS_PORT : ${self:custom.secrets.REDIS_PORT}
+     PORT : ${self:custom.secrets.PORT}
+custom:
+  secrets: ${file(serverenv.json)}

@@ -1,0 +1,7 @@
+{
+  "API_SERVICE_TOKEN":"whatever-you-Zk2ZaiNN3-want-your-token",
+  "OAUTH_SERVICE_TOKEN":"whatever-you-eyIiZl-want-your-token",
+  "REDIS_URL":"YOUR REDIS URL",
+  "REDIS_PORT":6379,
+  "PORT":3030
+}

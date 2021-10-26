@@ -1,0 +1,34 @@
+service: tsentiment-api-service
+
+provider:
+ name: aws
+ runtime: nodejs14.x
+ memorySize: 128
+ timeout: 10
+ stage: api
+ region: eu-central-1
+
+functions:
+ api:
+   handler: lambda.universal
+   events:
+     - http: ANY {proxy+}
+     - http: ANY /
+   environment :
+     LOG_SERVICE_TOKEN : ${self:custom.secrets.LOG_SERVICE_TOKEN}
+     LOG_SERVER_URL : ${self:custom.secrets.LOG_SERVER_URL}
+     REDIS_SERVICE_TOKEN : ${self:custom.secrets.REDIS_SERVICE_TOKEN}
+     REDIS_SERVER_URL : ${self:custom.secrets.REDIS_SERVER_URL}
+     TWITTER_APP_CONS_KEY : ${self:custom.secrets.TWITTER_APP_CONS_KEY}
+     TWITTER_APP_CONS_SECRET_KEY : ${self:custom.secrets.TWITTER_APP_CONS_SECRET_KEY}
+     TWITTER_APP_BEARER_TOKEN : ${self:custom.secrets.TWITTER_APP_BEARER_TOKEN}
+     TWITTER_APP_CALLBACK_URL : ${self:custom.secrets.TWITTER_APP_CALLBACK_URL}
+     TWITTER_SEARCH_API_URL : ${self:custom.secrets.TWITTER_SEARCH_API_URL}
+     TWITTER_RATE_LIMIT_API_URL : ${self:custom.secrets.TWITTER_RATE_LIMIT_API_URL}
+     TWITTER_API_REQUEST_URL : ${self:custom.secrets.TWITTER_API_REQUEST_URL}
+     TWITTER_API_ACCESS_URL : ${self:custom.secrets.TWITTER_API_ACCESS_URL}
+     REDUCED_REQUEST_QTY : ${self:custom.secrets.REDUCED_REQUEST_QTY}
+     TWITTER_TOTAL_USER_REQUEST_RATE_LIMIT : ${self:custom.secrets.TWITTER_TOTAL_USER_REQUEST_RATE_LIMIT}
+     PORT : ${self:custom.secrets.PORT}
+custom:
+  secrets: ${file(serverenv.json)}

@@ -1,0 +1,28 @@
+service: tsentiment-log-service
+
+provider:
+ name: aws
+ runtime: nodejs14.x
+ memorySize: 128
+ timeout: 10
+ stage: log
+ region: eu-central-1
+
+functions:
+ api:
+   handler: lambda.universal
+   events:
+     - http: ANY {proxy+}
+     - http: ANY /
+   environment :
+     API_SERVICE_TOKEN : ${self:custom.secrets.API_SERVICE_TOKEN}
+     OAUTH_SERVICE_TOKEN : ${self:custom.secrets.OAUTH_SERVICE_TOKEN}
+     DB_SERVICE_TOKEN : ${self:custom.secrets.DB_SERVICE_TOKEN}
+     AWS_LOG_BUCKET_NAME : ${self:custom.secrets.AWS_LOG_BUCKET_NAME}
+     AWS_ACCOUNT_ACCESS_ID : ${self:custom.secrets.AWS_ACCOUNT_ACCESS_ID}
+     AWS_ACCOUNT_SECRET_ACCESS_KEY : ${self:custom.secrets.AWS_ACCOUNT_SECRET_ACCESS_KEY}
+     JWT_SECRET : ${self:custom.secrets.JWT_SECRET}
+     DB_URL : ${self:custom.secrets.DB_URL}
+     PORT : ${self:custom.secrets.PORT}
+custom:
+  secrets: ${file(serverenv.json)}

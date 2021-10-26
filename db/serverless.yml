@@ -1,0 +1,24 @@
+service: tsentiment-db-service
+
+provider:
+ name: aws
+ runtime: nodejs14.x
+ memorySize: 128
+ timeout: 10
+ stage: db
+ region: eu-central-1
+
+functions:
+ api:
+   handler: lambda.universal
+   events:
+     - http: ANY {proxy+}
+     - http: ANY /
+   environment :
+     LOG_SERVICE_TOKEN : ${self:custom.secrets.LOG_SERVICE_TOKEN}
+     LOG_SERVER_URL : ${self:custom.secrets.LOG_SERVER_URL}
+     OAUTH_SERVICE_TOKEN : ${self:custom.secrets.OAUTH_SERVICE_TOKEN}
+     DB_URL : ${self:custom.secrets.DB_URL}
+     PORT : ${self:custom.secrets.PORT}
+custom:
+  secrets: ${file(serverenv.json)}
