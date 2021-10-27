@@ -26,7 +26,7 @@
 
     <h2>Twitter Rate Limits</h2>
 
-    <div id='#twitterrate'><p>As stated in <a hre='https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets'>
+    <div id='#twitterrate'><p>As stated in <a href='https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets'>
       Search Tweets: Standard v1.1</a>, a rate limit of 180 is given by the endpoint
       "search/tweets.json" defined for each user and resets every 15 minutes. Tsentiment,
       out of the total rate specified, makes use of 150 rates by reducing 30 from each user
