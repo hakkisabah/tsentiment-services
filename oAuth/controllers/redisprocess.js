@@ -17,7 +17,7 @@ const updateUserToken = async (userId,userToken,twitterOauthTokens) =>{
   const isUserOldToken = await getRedis(`${userId}_token`)
   // this condition usable for first time because if use response another first time it might be return null.
   if (isUserOldToken){
-   await delRedis(isUserOldToken)
+   await delRedis(`${userId}_token`)
   }
   await setRedis(`${userToken}`,userId)
   await setRedis(`${userId}_token`,userToken)

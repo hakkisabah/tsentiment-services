@@ -1,4 +1,4 @@
-const { setRedis } = require('../helpers/redis')
+const { setRedis,getRedis } = require('../helpers/redis')
 const axios = require('axios')
 
 const headers = {
@@ -17,6 +17,7 @@ exports.refreshAppToken = async (request, response) => {
     }
     const { data } = await axios.post(`${process.env.DB_SERVER_URL}refreshapptoken`, payload, { headers })
     const updatedUserAppToken = data.data
+    await setRedis(`${updatedUserAppToken.token}`,request.currentAuthData.user_id)
     await setRedis(`${request.currentAuthData.user_id}_token`, updatedUserAppToken.token)
     logInfo.line = 21
     logInfo.clientInfo = { user: request.currentAuthData.user_id, ip: request.clientIp, agent: request.useragent }
