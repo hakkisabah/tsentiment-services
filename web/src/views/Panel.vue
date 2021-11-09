@@ -1,43 +1,52 @@
 <template>
-  <v-container v-if='userToken !== "-"'>
-    <v-card class='text-center'>
-      userToken :
-      <v-card-text color='info'>
-        {{ userToken }}
-      </v-card-text>
-    </v-card>
-    <v-list class='d-flex justify-center'>
-    <v-card class='text-center mx-2'>
-      <v-btn
-        x-large
-        color='success'
-        dark
-        @click='Log_out()'
-      >
-        Logout
-      </v-btn>
-    </v-card>
-    <v-card class='text-center mx-2'>
-      <v-btn
-        v-if='!isDisabled'
-        x-large
-        color='success'
-        dark
-        @click='refreshAppToken()'
-        :disabled='isDisabled'
-      >
-        Refresh App Token
-      </v-btn>
-      <v-btn
-        v-else
-        x-large
-        color='warning'
-        dark
-      >
-        Refreshing..
-      </v-btn>
-    </v-card>
-    </v-list>
+  <v-container>
+    <v-container v-if='userToken !== "-"'>
+      <v-card class='text-center'>
+        userToken :
+        <v-card-text color='info'>
+          {{ userToken }}
+        </v-card-text>
+      </v-card>
+      <v-list class='d-flex justify-center'>
+      <v-card class='text-center mx-2'>
+        <v-btn
+          x-large
+          color='success'
+          dark
+          @click='Log_out()'
+        >
+          Logout
+        </v-btn>
+      </v-card>
+      <v-card class='text-center mx-2'>
+        <v-btn
+          v-if='!isDisabled'
+          x-large
+          color='success'
+          dark
+          @click='refreshAppToken()'
+          :disabled='isDisabled'
+        >
+          Refresh App Token
+        </v-btn>
+        <v-btn
+          v-else
+          x-large
+          color='warning'
+          dark
+        >
+          Refreshing..
+        </v-btn>
+      </v-card>
+      </v-list>
+    </v-container>
+    <v-container v-else>
+      <v-card class='text-center'>
+        <v-card-text color='warning'>
+          Retrieving information..
+        </v-card-text>
+      </v-card>
+    </v-container>
   </v-container>
 </template>
 
