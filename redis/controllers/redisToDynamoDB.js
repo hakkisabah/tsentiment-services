@@ -33,7 +33,6 @@ const analyzeAndGetPayload = (payload) => {
 
 exports.getPayload = (payload) => {
   const isKey = analyzeAndGetPayload(payload)
-  console.log("isKey > ",isKey)
   if (isKey) {
     // if payload has a name of value key it calling from post method
     // else it's calling from get method

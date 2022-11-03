@@ -16,7 +16,6 @@ const getCache = async (payload)=>{
 
 const updateUser = async (payload) =>{
   const user = await userCache.update(payload);
-  console.log("user",user.attrs)
   return user.attrs;
 }
 exports.updateUser = updateUser
