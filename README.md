@@ -13,7 +13,7 @@ All service folders contain .env-example and serverenv-example.json files
 
 With sample file, you can create your own .env file and develop in your local environment
 
-Note: Note that you have to `npm install` first on each folder. Also, if you want to work locally, it is recommended to use the dotenv package wherever process.env.XXX is used. It's always good to start from the first logger folder :)
+Note: Note that you have to `npm install` first on each folder, and you will need nodemon(global installation) and dotenv for local development. Also, if you want to work locally, it is recommended to use the dotenv package wherever process.env.XXX is used. It's always good to start from the first logger folder :)
 
 For local :
 `npm start`
