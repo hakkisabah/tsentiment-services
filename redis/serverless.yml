@@ -10,7 +10,13 @@ provider:
 
 functions:
  api:
-   handler: lambda.universal
+   handler: lambdaNew.universal
+   package:
+     patterns:
+       - '!setup/**'
+       - '!setup.js'
+       - '!serverenv.json'
+       - '!.env'
    events:
      - http: ANY {proxy+}
      - http: ANY /
@@ -20,5 +26,8 @@ functions:
      REDIS_URL : ${self:custom.secrets.REDIS_URL}
      REDIS_PORT : ${self:custom.secrets.REDIS_PORT}
      PORT : ${self:custom.secrets.PORT}
+     SELF_AWS_ACCESS_KEY_ID: ${self:custom.secrets.SELF_AWS_ACCESS_KEY_ID}
+     SELF_AWS_SECRET_ACCESS_KEY: ${self:custom.secrets.SELF_AWS_SECRET_ACCESS_KEY}
+     SELF_AWS_REGION: ${self:custom.secrets.SELF_AWS_REGION}
 custom:
   secrets: ${file(serverenv.json)}

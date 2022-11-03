@@ -17,8 +17,6 @@ app.use(bearerToken())
 /* Xss & Cors Protection */
 app.use(helmet())
 
-app.listen(port, () => {})
-
 const redisBase = require('redis')
 
 
@@ -39,6 +37,7 @@ app.get('/get', async (req, res) => {
   const isAuth = checkAuth(req.token)
   if (isAuth && req.query.key) {
     const getted = await client.get(req.query.key)
+    console.log("getted",getted)
     return res.json({ getted: getted })
   } else {
     return res.json({ msg: 'error', statusCode: 406 })
@@ -49,6 +48,7 @@ app.post('/set', async (req, res) => {
   // IMPORTANT : check value length because when value is 0 and then condition is false
   if (isAuth && req.body.key && req.body.value.length > 0) {
     const setted = await client.set(req.body.key, req.body.value)
+    console.log("setted", setted)
     return res.json({ setted: setted })
   } else {
     return res.json({ msg: 'error', statusCode: 406 })
@@ -59,11 +59,14 @@ app.get('/del', async (req, res) => {
   const isAuth = checkAuth(req.token)
   if (isAuth && req.query.key) {
     const deleted = await client.del(req.query.key)
+    console.log("deleted", deleted)
     return res.json({ deleted: deleted })
   } else {
     return res.json({ msg: 'error', statusCode: 406 })
   }
 })
+
+app.listen(port, () => {})
 
 module.exports.universal = async (event, context) => {
   const serverlessExpressInstance = serverlessExpress({ app })
