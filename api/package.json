@@ -4,7 +4,7 @@
   "description": "this service do all required api service process for tsentiment users",
   "main": "local.js",
   "scripts": {
-    "start": "nodemon local.js",
+    "dev": "cross-env NODE_ENV=development nodemon ./local.js",
     "deploy": "serverless deploy"
   },
   "keywords": [
@@ -25,5 +25,8 @@
     "helmet": "^4.6.0",
     "oauth": "^0.9.15",
     "request-ip": "^2.1.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3"
   }
 }

@@ -5,7 +5,7 @@ const tsentimentappKeys = {
   consSecret: process.env.TWITTER_APP_CONS_SECRET_KEY,
   // bearer token is optional for Twitter API V2
   bearerToken: process.env.TWITTER_APP_BEARER_TOKEN,
-  callbackUrl:process.env.TWITTER_APP_CALLBACK_URL
+  callbackUrl:process.env.NODE_ENV === "development" ? `http://localhost:${process.env.PORT}/callback` : process.env.TWITTER_APP_CALLBACK_URL
 }
 
 exports.oa = new OAuth(
