@@ -32,6 +32,13 @@ const analyzeAndGetPayload = (payload) => {
 }
 
 exports.getPayload = (payload) => {
+  if (payload.key && payload.value && !isNaN(payload.key) && !isNaN(payload.value)) {
+    // set remaining limit with only user_id
+    return {
+      user_id: payload.key,
+      remaining: payload.value,
+    }
+  }
   const isKey = analyzeAndGetPayload(payload)
   if (isKey) {
     // if payload has a name of value key it calling from post method

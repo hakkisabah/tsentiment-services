@@ -65,8 +65,8 @@ app.get('/get', async (req, res) => {
 })
 app.post('/set', async (req, res) => {
   const isAuth = checkAuth(req.token)
-  // IMPORTANT : check value length because when value is 0 and then condition is false
-  if (isAuth && req.body.key && req.body.value.length > 0) {
+  // IMPORTANT : check value length because when value is 0 with toString for integer length and then condition is false
+  if (isAuth && req.body.key && req.body.value.toString().length > 0) {
     const payload = getPayload({key:req.body.key,value:req.body.value})
     if (payload){
       const setted = await saveKey(payload);

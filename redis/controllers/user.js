@@ -53,9 +53,9 @@ exports.getKey = getKey;
 
 const saveKey = async (payload) => {
   try {
-    const key = Object.keys(payload)[1];
+    const key = Object.keys(payload)[1] // user_id does not postfix in redisToDynamoDB file, so its will be return undefined
     const isExist = await getCache(payload.user_id);
-    if (isExist){
+    if (isExist && key !== undefined){
       // reset or remaining keys typeof must be number
       isExist[key] = (key === 'reset' || key === 'remaining') ? +payload[key]: payload[key];
     }
